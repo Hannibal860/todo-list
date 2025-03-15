@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo-list</title>
+  <style>
+    ul,
+    li,
+    p {
+      margin: 0;
+      padding: 0;
+    }
+
+    button {
+      border: none;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: aliceblue;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 15px;
+      background-color: blueviolet;
+      border-radius: 16px;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .todo-list {
+      margin-bottom: 20px;
+    }
+
+    .todo-list__item {
+      width: 100%;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .todo-list__item:not(:last-child) {
+      margin-bottom: 10px;
+    }
+
+    .todo-list__text {
+      border: 2px solid rgba(0, 0, 0, 0.2);
+      flex-grow: 1;
+      padding: 7px 5px;
+      border-radius: 4px;
+    }
+
+    .button {
+      font-size: 16px;
+      border-radius: 4px;
+      padding: 9px;
+      cursor: pointer;
+    }
+
+    .form {
+      width: 100%;
+      display: flex;
+      gap: 10px;
+    }
+
+    .form__input {
+      flex-grow: 1;
+      padding: 7px 5px;
+      border-radius: 4px;
+      border: none;
+      font-size: 18px;
+      padding: 0 5px;
+    }
+
+    .form__button {
+      padding: 9px 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="title">
+      Todo-list
+    </h1>
+    <ul class="todo-list">
+
+    </ul>
+    <form class="form" action="">
+      <input class="form__input" type="text" name="" id="">
+      <button class="form__button button" type="submit">Add</button>
+    </form>
+  </div>
+
+  <script>
+    const todoList = document.querySelector('.todo-list');
+    const todoText = document.querySelector('.todo-list__text');
+    const form = document.querySelector('.form');
+
+    form.addEventListener('submit', addTask);
+    function addTask(e) {
+      e.preventDefault();
+      const formInput = document.querySelector('.form__input');
+      if (formInput.value) {
+        let inputValue = formInput.value;
+        const li = `<li class="todo-list__item">
+          <p class="todo-list__text">
+            ${inputValue}
+          </p>
+          <button class="button delete">
+            Delete
+          </button>
+      </li>`
+        todoList.insertAdjacentHTML('beforeend', li);
+        formInput.value = '';
+        formInput.focus();
+      }
+    }
+
+    const deleteTask = document.querySelector('.delete');
+    todoList.addEventListener('click', removeTask);
+    function removeTask(e) {
+      e.target.closest('.todo-list__item').remove();
+    }    
+  </script>
+</body>
+
+</html>
